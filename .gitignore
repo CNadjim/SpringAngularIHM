@@ -1,0 +1,28 @@
+Database/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+src/main/resources/public/node_modules
+src/main/resources/public/dist
+src/main/resources/public/idea
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
