@@ -1,8 +1,8 @@
-package com.server.ServerAPI.repo;
+package server.repository;
 
 import java.util.List;
 
-import com.server.ServerAPI.model.Customer;
+import server.model.Customer;
 import org.springframework.data.repository.CrudRepository;
 
 

@@ -1,4 +1,4 @@
-package com.server.ServerAPI.model;
+package server.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
