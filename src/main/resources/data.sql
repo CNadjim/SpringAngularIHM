@@ -1,3 +1,3 @@
-INSERT INTO customer (firstname, lastname) VALUES
+INSERT INTO user (firstname, lastname) VALUES
   ('nadjim', 'chabane'),
   ('syrine', 'mehiri');
