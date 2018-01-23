@@ -1,3 +1,4 @@
 INSERT INTO user (firstname, lastname) VALUES
   ('nadjim', 'chabane'),
-  ('syrine', 'mehiri');
+  ('Ilyaçe', 'REGAIBI'),
+  ('Gurnavdeep', 'SINGH');

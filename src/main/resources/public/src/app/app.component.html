@@ -1,23 +1,23 @@
-<mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')" >
+<mat-sidenav-container class="appContainer" (backdropClick)="close('backdrop')" >
 
   <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
     <mat-nav-list>
-
+      <h3 mat-subheader class="mat-elevation-z1" >Menu</h3>
+      <mat-divider></mat-divider>
       <a mat-list-item routerLink="/home" (click)="sidenav.close()" > Home </a>
+      <mat-divider></mat-divider>
       <a mat-list-item routerLink="/user" (click)="sidenav.close()" > User </a>
+      <mat-divider></mat-divider>
     </mat-nav-list>
   </mat-sidenav>
 
+
+
   <mat-sidenav-content>
-    <div class="container-fluid">
-      <mat-toolbar color="primary">
+      <mat-toolbar color="primary" class="mat-elevation-z6">
         <button mat-icon-button (click)="sidenav.open()"><mat-icon>menu</mat-icon></button>
       </mat-toolbar>
-    </div>
-    <div class="container">
       <router-outlet></router-outlet>
-    </div>
-
   </mat-sidenav-content>
 
 </mat-sidenav-container>

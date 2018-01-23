@@ -18,6 +18,7 @@ In Memory DB      | H2
 Persistence       | JPA (Using Spring Data)
 Client Build Tools| [angular-cli](https://github.com/angular/angular-cli), npm
 Server Build Tools| Maven (Java)
+Tests Tools        | Junit / Mockito / Cucumber / Selenium 
 
 
 ### Build Frontend 
@@ -30,9 +31,12 @@ npm start
 
 ### Build Backend (SpringBoot Java)
 http://localhost:8080
-```bash
-# backend Dev to /
+```
+# Backend Dev to /
 mvn clean install
 mvn spring-boot:run
 ```
 
+#### Links 
+
+- Swagger : http://localhost:8080/swagger-ui.html
