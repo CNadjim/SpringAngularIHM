@@ -4,9 +4,9 @@
     <mat-nav-list>
       <h3 mat-subheader class="mat-elevation-z1" >Menu</h3>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/home" (click)="sidenav.close()" > Home </a>
+      <a mat-list-item routerLink="/home" (click)="sidenav.close()" > {{ 'Nav.Home' | translate}}  </a>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/user" (click)="sidenav.close()" > User </a>
+      <a mat-list-item routerLink="/user" (click)="sidenav.close()" > {{ 'Nav.User' | translate }} </a>
       <mat-divider></mat-divider>
     </mat-nav-list>
   </mat-sidenav>
@@ -15,8 +15,37 @@
 
   <mat-sidenav-content>
       <mat-toolbar color="primary" class="mat-elevation-z6">
-        <button mat-icon-button (click)="sidenav.open()"><mat-icon>menu</mat-icon></button>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col align-self-start" style="padding: 0">
+              <button mat-icon-button (click)="sidenav.open()"><mat-icon>menu</mat-icon></button>
+            </div>
+
+            <div class="align-self-end">
+              <button mat-icon-button [matMenuTriggerFor]="more">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+
+              <mat-menu #more="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="languages">
+                  <mat-icon>language</mat-icon>
+                  <span>Languages</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>settings</mat-icon>
+                  <span>Settings</span>
+                </button>
+              </mat-menu>
+
+              <mat-menu #languages="matMenu">
+                <button mat-menu-item (click)="translate.use(lang)" *ngFor="let lang of translate.getLangs()">{{lang}}</button>
+              </mat-menu>
+            </div>
+          </div>
+
+        </div>
       </mat-toolbar>
+
       <router-outlet></router-outlet>
   </mat-sidenav-content>
 

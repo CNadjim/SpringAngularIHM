@@ -1,0 +1,9 @@
+{
+  "Nav":{
+    "Home" : "Accueil",
+    "User" : "Utilisateur"
+  },
+  "HOME": {
+    "TITLE": "Bonjour Angular avec ngx-translate !"
+  }
+}
