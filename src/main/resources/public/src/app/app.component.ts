@@ -1,30 +1,25 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {TranslateService} from "@ngx-translate/core";
+import {SidenavService} from "./shared/services/sideNav/sidenav.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnInit {
+
 
   @ViewChild('sidenav') sidenav: MatSidenav;
 
-  reason = '';
-  translate : TranslateService;
-  constructor(translate: TranslateService) {
-    this.translate = translate;
-    this.translate.addLangs(["English", "Français"]);
-    this.translate.setDefaultLang('English');
-    let browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang.match(/English|Français/) ? browserLang : 'English');
+  constructor(
+    private sidenavService : SidenavService
+  ) {
   }
 
-  close(reason: string) {
-    this.reason = reason;
-    this.sidenav.close();
+  ngOnInit(): void {
+    this.sidenavService.setSidenav(this.sidenav);
   }
 
 

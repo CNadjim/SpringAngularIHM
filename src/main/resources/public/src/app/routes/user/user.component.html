@@ -11,19 +11,33 @@
     </ng-container>
 
     <!-- Name Column -->
+    <ng-container matColumnDef="UserName">
+      <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
     <ng-container matColumnDef="FirstName">
       <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="LastName">
       <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Authorities">
+      <mat-header-cell *matHeaderCellDef> Authorities </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span *ngFor="let authority of element.authorities"> {{authority.authority}} </span>
+      </mat-cell>
     </ng-container>
 
 
-    <mat-header-row *matHeaderRowDef="['Id','FirstName','LastName']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['Id','FirstName','LastName']"></mat-row>
+    <mat-header-row *matHeaderRowDef="['Id','UserName','FirstName','LastName','Authorities']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['Id','UserName','FirstName','LastName','Authorities']"></mat-row>
   </mat-table>
 </div>

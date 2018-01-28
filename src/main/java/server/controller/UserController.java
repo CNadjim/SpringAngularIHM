@@ -1,46 +1,70 @@
 package server.controller;
 
-import java.util.ArrayList;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import java.util.HashMap;
 import java.util.List;
-
-import server.model.User;
-import server.repository.UserRepository;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+import server.exception.ResourceConflictException;
+import server.model.User;
+import server.model.UserRequest;
+import server.service.UserService;
+
 
 @RestController
-@RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     @Autowired
-    UserRepository repository;
+    private UserService userService;
 
-    @GetMapping(value="/",  produces=MediaType.APPLICATION_JSON_VALUE)
-    public List<User> getAll() {
-        List<User> list = new ArrayList<>();
-        Iterable<User> Users = repository.findAll();
-        Users.forEach(list::add);
-        return list;
+
+    @RequestMapping(method = GET, value = "/user/{userId}")
+    public User getUserById(@PathVariable Long userId) {
+        return this.userService.findById(userId);
     }
 
-    @GetMapping(value="/{id}",  produces=MediaType.APPLICATION_JSON_VALUE)
-    public User getUser(@PathVariable long id){
-        User User = repository.findOne(id);
-        return User ;
+    @RequestMapping(method = GET, value = "/user/all")
+    public List<User> getAllUser() {
+        return this.userService.findAll();
     }
 
-    @PostMapping(value="/add")
-    public User postUser(@RequestBody User User) {
-        repository.save(new User(User.getFirstName(), User.getLastName()));
-        return User;
+    @RequestMapping(method = DELETE, value = "/user/delete/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+        this.userService.deleteUser(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/delete/{id}")
-    public void deleteUser(@PathVariable long id){
-        repository.delete(id);
+    @RequestMapping(method = POST, value = "/user/add")
+    public ResponseEntity<?> addUser(@RequestBody UserRequest userRequest, UriComponentsBuilder ucBuilder) {
+
+        User existUser = this.userService.findByUsername(userRequest.getUsername());
+        if (existUser != null) {
+            throw new ResourceConflictException(userRequest.getId(), "Username already exists");
+        }
+        User user = this.userService.save(userRequest);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(user.getId()).toUri());
+        return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }
 
-
+    @RequestMapping(method = GET, value = "/user/whoami")
+    @PreAuthorize("hasRole('USER')")
+    public User currentUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 
 }

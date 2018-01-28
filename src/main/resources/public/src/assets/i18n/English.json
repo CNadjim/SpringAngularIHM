@@ -1,7 +1,8 @@
 {
   "Nav":{
     "Home" : "Home",
-    "User" : "User"
+    "User" : "User",
+    "Login" : "Login"
   },
   "HOME": {
     "TITLE": "Hello Angular with ngx-translate!"

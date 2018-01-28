@@ -1,0 +1,9 @@
+.full-width{
+  width: 100%;
+}
+.login{
+  padding-top: 10px;
+}
+.login mat-card{
+  margin: auto;
+}

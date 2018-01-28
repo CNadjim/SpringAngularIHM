@@ -1,5 +1,10 @@
+import {AuthorityModel} from "../auth/authority.model";
+
 export class UserModel {
   id: number;
-  firstName: string;
-  lastName: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  authorities: AuthorityModel[];
 }
+
