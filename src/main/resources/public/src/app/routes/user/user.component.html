@@ -32,7 +32,7 @@
     <ng-container matColumnDef="Authorities">
       <mat-header-cell *matHeaderCellDef> Authorities </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span *ngFor="let authority of element.authorities"> {{authority.authority}} </span>
+        <span *ngFor="let authority of element.authorities"> {{authority.name}} </span>
       </mat-cell>
     </ng-container>
 

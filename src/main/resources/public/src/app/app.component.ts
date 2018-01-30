@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
 import {TranslateService} from "@ngx-translate/core";
 import {SidenavService} from "./shared/services/sideNav/sidenav.service";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,6 +20,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
   }
+
+
 
 
 

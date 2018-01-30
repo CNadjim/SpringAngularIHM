@@ -16,19 +16,19 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { LoginComponent } from './routes/login/login.component';
 import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './layout/header/header.component';
-import {AuthService} from "./shared/services/auth/auth.service";
-import {UserService} from "./shared/services/user/user.service";
 import {AppMaterialModule} from "./shared/components/materialModule/app.material.module";
 import {SidenavService} from "./shared/services/sideNav/sidenav.service";
 import {GuardsModule} from "./guards/guards.module";
+import {TokenInterceptor} from "./shared/services/http/TokenInterceptor";
+import {AuthService} from "./shared/services/auth/auth.service";
+import { TodoItemComponent } from './routes/todo-item/todo-item.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
-
-export function initUserFactory(userService: UserService) {
-  return () => userService.initUser();
+export function initUserFactory(authService: AuthService) {
+    return () => authService.refreshUser();
 }
 
 
@@ -38,7 +38,8 @@ export function initUserFactory(userService: UserService) {
     HomeComponent,
     UserComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    TodoItemComponent
   ],
   imports: [
     BrowserModule,
@@ -60,10 +61,15 @@ export function initUserFactory(userService: UserService) {
   ],
   providers: [
     {
-      'provide': APP_INITIALIZER,
-      'useFactory': initUserFactory,
-      'deps': [UserService],
-      'multi': true
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initUserFactory,
+      deps: [AuthService],
+      multi: true
     }
     ,
     SidenavService

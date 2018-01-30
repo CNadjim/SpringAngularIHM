@@ -1,8 +1,15 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
   <div class="container">
     <div class="row">
-      <div class="col align-self-start" style="padding: 0">
+      <div class="col align-self-start 	d-lg-none" style="padding: 0">
         <button mat-icon-button (click)="openSidenav()"><mat-icon>menu</mat-icon></button>
+      </div>
+
+      <div class="col align-self-start 	d-none d-lg-block" style="padding: 0">
+        <button  mat-button routerLink="/">Home</button>
+        <button  mat-button routerLink="/user">User</button>
+        <button  mat-button routerLink="/todo">Todo</button>
+
       </div>
 
       <div class="align-self-end">

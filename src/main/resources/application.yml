@@ -3,11 +3,17 @@ app:
 
 jwt:
   header: Authorization
-  expires_in: 600 # 10 minutes
-  secret: queenvictoria
-  cookie: AUTH-TOKEN
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: api/auth/login
+      refresh: api/auth/refresh
 
 spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
   h2:
     console:
       enabled: true
@@ -17,4 +23,7 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
 

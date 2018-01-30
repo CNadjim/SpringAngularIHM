@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {UserModel} from '../../shared/models/user/user.model';
-import {UserService} from '../../shared/services/user/user.service';
+import {AuthService} from "../../shared/services/auth/auth.service";
+import {UserService} from "../../shared/services/user/user.service";
 
 @Component({
   selector: 'app-user',
@@ -11,6 +12,7 @@ import {UserService} from '../../shared/services/user/user.service';
 export class UserComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
+
   constructor(private userService: UserService) {
     this.getAllUser();
   }
@@ -19,7 +21,7 @@ export class UserComponent implements OnInit {
   }
 
   public getAllUser() {
-    this.userService.getUsers().subscribe(data => {
+    this.userService.allUser().subscribe(data => {
       this.dataSource = new MatTableDataSource<any>(data);
     });
   }

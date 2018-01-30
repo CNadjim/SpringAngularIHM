@@ -5,6 +5,9 @@ export class UserModel {
   username: string;
   firstname: string;
   lastname: string;
+  enabled: boolean;
   authorities: AuthorityModel[];
+  email: string;
+  lastPasswordResetDate : string;
 }
 

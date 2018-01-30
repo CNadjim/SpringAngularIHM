@@ -1,3 +1,4 @@
 export class AuthorityModel{
-  authority: string;
+  id : number;
+  name: string;
 }

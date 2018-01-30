@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {UserService} from "../../shared/services/user/user.service";
 import {AuthService} from "../../shared/services/auth/auth.service";
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
@@ -19,7 +18,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private sidenavService: SidenavService,
-    private userService : UserService,
     private authService: AuthService,
     private translateService: TranslateService) {
 
@@ -34,14 +32,13 @@ export class HeaderComponent implements OnInit {
   }
 
   hasSignedIn() {
-    return !!this.userService.currentUser;
+    return !!this.authService.currentUser;
   }
 
   onLogout(){
-    this.authService.logout().subscribe(res => {
-      this.router.navigate(['/']);
-      this.userService.currentUser = null;
-    });
+    this.authService.logout();
+    this.authService.currentUser = null;
+    this.router.navigate(['/']);
   }
 
   openSidenav() {

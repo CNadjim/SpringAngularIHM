@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import {UserService} from './user/user.service';
 import {AuthService} from "./auth/auth.service";
+import {TodoItemService} from "./todoItem/todo.item.service";
+import {UserService} from "./user/user.service";
 
 @NgModule({
   providers: [
+    AuthService,
     UserService,
-    AuthService
+    TodoItemService
   ]
 })
 export class ServicesModule { }
