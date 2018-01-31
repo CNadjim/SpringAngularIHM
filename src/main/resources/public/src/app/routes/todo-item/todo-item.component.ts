@@ -14,6 +14,7 @@ export class TodoItemComponent implements OnInit {
   constructor(
     private todoItemService:TodoItemService
   ) {
+    this.getAllTodoItemByUserName();
     this.getAllTodoItem();
   }
 
@@ -22,7 +23,14 @@ export class TodoItemComponent implements OnInit {
 
   public onDeletingTodoItem(id){
     this.todoItemService.deleteTodoItem(id).subscribe(data => {
-      this.getAllTodoItem();
+      this.getAllTodoItemByUserName();
+    })
+  }
+
+  public getAllTodoItemByUserName()
+  {
+    this.todoItemService.getAllByUserName().subscribe(data=>{
+      this.todoItemList = data;
     })
   }
 

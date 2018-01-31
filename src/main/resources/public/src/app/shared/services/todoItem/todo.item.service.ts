@@ -15,7 +15,7 @@ export class TodoItemService {
     private http: HttpClient) {
   }
 
-  public getAll(): Observable<any> {
+  public getAllByUserName(): Observable<any> {
     return this.http.get('/api/todoitem/'+this.authService.currentUser.username);
   }
 
@@ -23,6 +23,9 @@ export class TodoItemService {
     return this.http.delete('/api/todoitem/'+id);
   }
 
+  public getAll(): Observable<any> {
+    return this.http.get('/api/todoitem');
+  }
 
 
 }
