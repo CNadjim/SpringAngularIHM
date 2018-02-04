@@ -1,6 +1,33 @@
 <div class="container" style="padding-top: 15px;">
   <div class="row">
 
+    <div  class="col-xs-12 col-md-4" style="margin-top: 10px;">
+      <form>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>Ajouter un nouvel TodoItem</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field class="width100">
+              <input [formControl]="todoItemTitleFormControl" matInput placeholder="Titre" required>
+              <mat-error *ngIf="todoItemTitleFormControl.hasError('required')">
+                le titre est <strong>requis</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="width100">
+              <textarea [formControl]="todoItemDescriptionFormControl" matInput placeholder="Description" required></textarea>
+              <mat-error *ngIf="todoItemDescriptionFormControl.hasError('required')">
+                la description est <strong>requise</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button [disabled]="!todoItemTitleFormControl.valid || !todoItemDescriptionFormControl.valid" mat-raised-button color="primary" (click)="onAddingTodoItem()">Ajouter</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
     <div *ngFor="let todoItem of todoItemList" class="col-xs-12 col-md-4" style="margin-top: 10px;">
       <mat-card class="example-card">
         <mat-card-header>
@@ -12,7 +39,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button (click)="onDeletingTodoItem(todoItem.id)">Delete</button>
+          <button mat-raised-button color="warn" (click)="onDeletingTodoItem(todoItem.id)">Delete</button>
         </mat-card-actions>
       </mat-card>
     </div>

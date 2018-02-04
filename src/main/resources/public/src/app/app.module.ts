@@ -14,7 +14,7 @@ import { UserComponent } from './routes/user/user.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { LoginComponent } from './routes/login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderComponent } from './layout/header/header.component';
 import {AppMaterialModule} from "./shared/components/materialModule/app.material.module";
 import {SidenavService} from "./shared/services/sideNav/sidenav.service";
@@ -22,6 +22,7 @@ import {GuardsModule} from "./guards/guards.module";
 import {TokenInterceptor} from "./shared/services/http/TokenInterceptor";
 import {AuthService} from "./shared/services/auth/auth.service";
 import { TodoItemComponent } from './routes/todo-item/todo-item.component';
+import { ProfileComponent } from './routes/profile/profile.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -39,7 +40,8 @@ export function initUserFactory(authService: AuthService) {
     UserComponent,
     LoginComponent,
     HeaderComponent,
-    TodoItemComponent
+    TodoItemComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ export function initUserFactory(authService: AuthService) {
     GuardsModule,
     ServicesModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     TranslateModule.forRoot({

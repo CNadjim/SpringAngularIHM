@@ -3,17 +3,12 @@ package server.rest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import server.model.TodoItem;
 import server.service.TodoItemService;
 
 import javax.inject.Inject;
 import java.util.List;
-
-import static java.util.Objects.isNull;
 
 
 @RestController
@@ -40,6 +35,12 @@ public class TodoItemController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<Void> deleteTodoItem(@PathVariable Long id) {
         return this.todoItemService.deleteTodoItem(id);
+    }
+
+    @RequestMapping(path = "/api/todoitem/add", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<Void> addTodoItem(@RequestBody TodoItem todoItem) {
+        return this.todoItemService.add(todoItem);
     }
 
 

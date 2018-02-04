@@ -5,6 +5,6 @@
     "Login" : "Login"
   },
   "HOME": {
-    "TITLE": "Hello Angular with ngx-translate!"
+    "TITLE": "Hello Angular"
   }
 }

@@ -7,6 +7,7 @@ import {AdminGuard} from "./guards/admin/admin.guard";
 import {GuestGuard} from "./guards/guest/guest.guard";
 import {TodoItemComponent} from "./routes/todo-item/todo-item.component";
 import {UserGuard} from "./guards/user/user.guard";
+import {ProfileComponent} from "./routes/profile/profile.component";
 
 export const ROUTES: Routes = [
   { path: '',      component: HomeComponent },
@@ -14,5 +15,6 @@ export const ROUTES: Routes = [
   { path: 'user',  component: UserComponent, canActivate: [AdminGuard] },
   { path: 'login',  component: LoginComponent , canActivate: [GuestGuard]},
   { path: 'todo',  component: TodoItemComponent, canActivate: [UserGuard] },
+  { path: 'profile',  component: ProfileComponent, canActivate: [UserGuard] },
   { path: '**',    component: HomeComponent }
 ];

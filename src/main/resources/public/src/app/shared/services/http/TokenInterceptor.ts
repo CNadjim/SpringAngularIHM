@@ -4,15 +4,13 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpClient
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {AuthService} from "../auth/auth.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-
-
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 

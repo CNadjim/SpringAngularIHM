@@ -47,9 +47,11 @@ export class AuthService {
   }
 
   initUser(){
-    this.getCurrentUser().subscribe(data =>{
+    const promise = this.getCurrentUser().toPromise().then(data =>{
       this.currentUser = data;
-    })
+    }).catch();
+
+    return promise;
   }
 
 

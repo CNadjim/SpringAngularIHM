@@ -41,7 +41,7 @@ public class TodoItemServiceTest {
 
 
     @Test
-    public void get_should_return_list(){
+    public void get_all_should_return_list(){
         //given
         List<TodoItem> todoItems = new ArrayList<>();
         TodoItem todoItem = new TodoItem();
@@ -53,16 +53,78 @@ public class TodoItemServiceTest {
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().contains(todoItem)).isEqualTo(true);
+        verify(todoItemRepository).findAll();
     }
 
     @Test
-    public void get_should_return_not_found(){
+    public void get_should_return_no_CONTENT(){
         //given
-        String userName = "USERNAME_IMAGINAIRE";
-        when(userRepository.findByUsername(userName)).thenReturn(null);
+        List<TodoItem> todoItems = new ArrayList<>();
+        String userName = "";
+        when(todoItemRepository.findByUserName(userName)).thenReturn(todoItems);
 
         //when
         ResponseEntity<List<TodoItem>> responseEntity = todoItemService.getAllTodoItemByUserName(userName);
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        verify(todoItemRepository).findByUserName(eq(userName));
+    }
+
+    @Test
+    public void delete_should_delete_and_return_OK(){
+        //given
+        Long id = new Long(1);
+        when(todoItemRepository.exists(eq(id))).thenReturn(true);
+
+        //when
+        ResponseEntity<Void> responseEntity = todoItemService.deleteTodoItem(id);
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        verify(todoItemRepository).exists(eq(id));
+        verify(todoItemRepository).delete(eq(id));
+    }
+
+    @Test
+    public void delete_should_not_delete_and_return_NOFOUND(){
+        //given
+        Long id = new Long(1);
+        when(todoItemRepository.exists(eq(id))).thenReturn(false);
+
+        //when
+        ResponseEntity<Void> responseEntity = todoItemService.deleteTodoItem(id);
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        verify(todoItemRepository).exists(eq(id));
+    }
+
+
+    @Test
+    public void add_should_add_and_return_CREATED(){
+        //given
+        TodoItem todoItem = new TodoItem();
+        User user = new User();
+        when(userRepository.findByUsername(todoItem.getUserName())).thenReturn(user);
+
+        //when
+        ResponseEntity<Void> responseEntity = todoItemService.add(todoItem);
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        verify(todoItemRepository).save(eq(todoItem));
+        verify(userRepository).findByUsername(todoItem.getUserName());
+    }
+
+    @Test
+    public void add_should_not_add_and_return_USER_NOT_FOUND(){
+        //given
+        TodoItem todoItem = new TodoItem();
+        when(userRepository.findByUsername(todoItem.getUserName())).thenReturn(null);
+
+        //when
+        ResponseEntity<Void> responseEntity = todoItemService.add(todoItem);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);

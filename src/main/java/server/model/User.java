@@ -1,5 +1,6 @@
 package server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import server.security.model.Authority;
 
 import javax.persistence.*;
@@ -46,9 +47,9 @@ public class User {
     @NotNull
     private Boolean enabled;
 
+    @JsonIgnore
     @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
     private Date lastPasswordResetDate;
 
 

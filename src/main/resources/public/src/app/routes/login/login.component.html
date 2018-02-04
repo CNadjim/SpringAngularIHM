@@ -11,12 +11,12 @@
       <mat-card-content>
         <form>
           <mat-form-field class="full-width">
-            <input matInput name="username" #username="ngModel" [(ngModel)]="usernameBufferForm" placeholder="user/admin" required>
+            <input matInput id="userNameInput" name="username" #username="ngModel" [(ngModel)]="usernameBufferForm" placeholder="user/admin" required>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput name="password" [(ngModel)]="passwordBufferForm" type="password" placeholder="123" required>
+            <input matInput id="passwordInput" name="password" [(ngModel)]="passwordBufferForm" type="password" placeholder="123" required>
           </mat-form-field>
-          <button mat-raised-button color="primary" (click)="onSubmit()" >Login</button>
+          <button id="submitBtn" mat-raised-button color="primary" (click)="onSubmit()" >Login</button>
         </form>
       </mat-card-content>
 

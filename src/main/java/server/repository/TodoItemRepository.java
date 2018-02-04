@@ -10,5 +10,5 @@ import java.util.List;
 public interface TodoItemRepository extends JpaRepository<TodoItem, Long> {
     TodoItem findByName(String name);
     List<TodoItem> findByUserName(String userName);
-
+    boolean existsTodoItemsByUserName(String userName);
 }

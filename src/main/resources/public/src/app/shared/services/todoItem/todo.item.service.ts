@@ -23,6 +23,10 @@ export class TodoItemService {
     return this.http.delete('/api/todoitem/'+id);
   }
 
+  public addTodoItem(todoItem:TodoItemModel){
+    return this.http.post('/api/todoitem/add',todoItem);
+  }
+
   public getAll(): Observable<any> {
     return this.http.get('/api/todoitem');
   }

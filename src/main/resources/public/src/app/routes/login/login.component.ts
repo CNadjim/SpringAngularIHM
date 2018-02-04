@@ -36,8 +36,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequest)
       .subscribe(data => {
         localStorage.setItem('TOKEN_KEY', data.token);
-        this.authService.initUser();
-        this.router.navigate(['/']);
+        this.authService.initUser().then( res =>{
+              this.router.navigate(['/profile']);
+          }
+        );
       },
       error => {
       });
