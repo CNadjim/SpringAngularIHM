@@ -8,7 +8,7 @@ export class UserGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.currentUser) {
-      if (JSON.stringify(this.authService.currentUser.authorities).search('ROLE_USER') !== -1) {
+      if (this.authService.haveUserAuth()) {
         return true;
       } else {
         this.router.navigate(['/403']);

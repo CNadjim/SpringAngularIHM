@@ -1,0 +1,3 @@
+# Security enable/disable
+security:
+  ignored: /**

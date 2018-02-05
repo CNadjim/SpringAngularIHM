@@ -4,8 +4,13 @@
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
+  background-color: #fafafa;
 }
 
 button:focus {
   outline: none;
+}
+
+.cardContainer{
+  padding-top: 15px;
 }

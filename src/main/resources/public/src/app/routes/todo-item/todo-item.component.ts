@@ -19,20 +19,19 @@ export class TodoItemComponent implements OnInit {
     private authService:AuthService,
     private todoItemService:TodoItemService) {
     this.getAllTodoItemByUserName();
-    this.getAllTodoItem();
+    //this.getAllTodoItem();
   }
 
   ngOnInit() {
   }
 
   public onAddingTodoItem(){
-    console.log(this.authService.currentUser.username);
     let todoItem = new TodoItemModel();
     todoItem.description = this.todoItemDescriptionFormControl.value;
     todoItem.name = this.todoItemTitleFormControl.value;
     todoItem.userName = this.authService.currentUser.username;
     this.todoItemService.addTodoItem(todoItem).subscribe(data => {
-      this.getAllTodoItem();
+      this.getAllTodoItemByUserName();
     })
   }
 

@@ -1,9 +1,6 @@
 .full-width{
   width: 100%;
 }
-.login{
-  padding-top: 10px;
-}
-.login mat-card{
+.cardContainer mat-card{
   margin: auto;
 }

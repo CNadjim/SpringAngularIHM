@@ -2,7 +2,8 @@
   "Nav":{
     "Home" : "Home",
     "User" : "User",
-    "Login" : "Login"
+    "Login" : "Login",
+    "Todo" : "Todo Item"
   },
   "HOME": {
     "TITLE": "Hello Angular"

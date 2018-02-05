@@ -54,5 +54,13 @@ export class AuthService {
     return promise;
   }
 
+  haveAdminAuth() : boolean{
+    return JSON.stringify(this.currentUser.authorities).search('ROLE_ADMIN') !== -1 ;
+  }
+
+  haveUserAuth() : boolean{
+    return JSON.stringify(this.currentUser.authorities).search('ROLE_USER') !== -1 ;
+  }
+
 
 }

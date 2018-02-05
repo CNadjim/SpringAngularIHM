@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   passwordBufferForm : string;
   loginRequest: LoginRequestModel;
 
+  error: boolean = false;
+
 
 
   constructor(
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
         );
       },
       error => {
+        this.error = true;
       });
 
   }

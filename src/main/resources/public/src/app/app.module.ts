@@ -23,6 +23,7 @@ import {TokenInterceptor} from "./shared/services/http/TokenInterceptor";
 import {AuthService} from "./shared/services/auth/auth.service";
 import { TodoItemComponent } from './routes/todo-item/todo-item.component';
 import { ProfileComponent } from './routes/profile/profile.component';
+import { UnauthorizeComponent } from './routes/unauthorize/unauthorize.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -41,7 +42,8 @@ export function initUserFactory(authService: AuthService) {
     LoginComponent,
     HeaderComponent,
     TodoItemComponent,
-    ProfileComponent
+    ProfileComponent,
+    UnauthorizeComponent
   ],
   imports: [
     BrowserModule,

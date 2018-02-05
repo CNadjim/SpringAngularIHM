@@ -18,6 +18,7 @@ public class TodoItemController {
     @Inject
     private TodoItemService todoItemService;
 
+
     @RequestMapping(path = "/api/todoitem", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<TodoItem>> getAllTodoItem() {
