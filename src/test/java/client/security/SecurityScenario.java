@@ -137,7 +137,6 @@ public class SecurityScenario {
 
     @And("^I click into logout button$")
     public void iClickIntoLogoutButton() throws Throwable {
-
         driver.findElement(By.id("more")).click();
         pause();
         driver.findElement(By.id("logoutBtn")).click();
@@ -162,7 +161,6 @@ public class SecurityScenario {
 
 
     public void pause(){
-
         try{
             Thread.sleep(500);
         } catch(InterruptedException ie){ }

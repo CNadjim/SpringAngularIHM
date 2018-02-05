@@ -146,7 +146,6 @@ public class TodoItemScenario {
 
 
     public void pause(){
-
         try{
             Thread.sleep(500);
         } catch(InterruptedException ie){ }
